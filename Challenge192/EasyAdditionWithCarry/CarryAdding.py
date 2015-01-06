@@ -1,25 +1,36 @@
+import fileinput
 
-while (!eof()) {
+# while (!eof()) {
+for line in fileinput.input()
     #
     # Parse the input
     #
-    terms = parseInput(readln())
+#    terms = parseInput(readln())
+    terms = parseInput(line)
 
     #
     # Build the output
     #
     displayOutput(terms)
-}
+# }
 
-parseInput(String inputLine) {
+# parseInput(String inputLine) {
+def parseInput(inputLine)
+
 #
 # Validate the input: Must have a single argument of the form MM+NN[+OO...]
 #
-    if (intpuLine.match("\d+{\+\d+}+))") {
-        usage()
-        exit()
-    }
+    # if (inputLine.match("\d+{\+\d+}+))") {
+    #     usage()
+    #     exit()
+    # }
+    terms = re.match(inputLine, "(\d+){\+(\d+)}+")
 
+    if (terms is None)
+        usage()
+        quit()
+
+    return terms
 #
 # Pad the terms on the left (right-justify).
 #
