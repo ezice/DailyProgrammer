@@ -26,32 +26,51 @@ def parseInput(inputLine)
     #
     # Pad the terms on the left (right-justify).
     #
-    maxLength = getMaxLength(terms)
+    # maxLength = getMaxLength(terms)
 
     # for (int i; i < inputTerms.size(); i++) {
     #     inputTerms[i] = inputTerms[i].padLeft(maxLength)
     # }
 
->> start here
+    # for term in terms
+
+    return terms
+
+def displayOutput(terms)
+    displayWidth = displayEquation(terms)
+    displayCarry(terms, displayWidth)
+
+def displayEquation(terms, maxLength)
+    sum = 0
+
     for term in terms
+        sum = sum + term
 
-    return inputTerms
-}
+    sumWidth = len(sum)
 
-int getMaxLength(String inputTerms[]) {
+    for term in terms
+        print term.rjust(sumWidth)
 
+    print "=".rjust(sumWidth, "=")
+    print sum
+    return sumWidth
+
+def displayCarry(terms, displayWidth)
+    print "=".rjust(sumWidth, "=")
+
+    carryString = ""
     #
-    # Determine maximum length of the terms.
-    #
-    for (String term in inputTerms) {
-        if (term.length() > maxLength) {
-            maxLength = term.length()
-        }
-    }
+    # Scan left to right.  The first position that can carry is just to the
+    # right of the begining (position 1).
+    for position in [1..displayWidth]
+        sum = 0
+        for term in terms
+            sum = sum + term.rjust(sumWidth)[position]
 
-    return maxLength
-}
+        if sum = 0
+            carryString = carryString + " "
+        else
+            carryString = carryString + sum
 
-displayOutput(String terms[]) {
-
-}
+    print carryString.rjust(sumWidth)
+    
