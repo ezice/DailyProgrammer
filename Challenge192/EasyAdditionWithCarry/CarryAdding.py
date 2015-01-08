@@ -1,24 +1,16 @@
 import sys
+import re
 
-for line in sys.stdin:
-    #
-    # Parse the input
-    #
-    terms = parseInput(line)
+def usage():
+    print("usage: input format must be of the form X+Y[+Z]*")
 
-    #
-    # Build the output
-    #
-    displayOutput(terms)
-
-# parseInput(String inputLine) {
 def parseInput(inputLine):
 
     #
     # Validate the input: Must have a single argument of the form MM+NN[+OO...]
     #
-    terms = re.match(inputLine, "(\d+){\+(\d+)}+")
-
+    terms = re.match(inputLine, "(\d+)[]\+(\d+)]+")
+    print(terms)
     if terms is None:
         usage()
         quit()
@@ -49,14 +41,14 @@ def displayEquation(terms, maxLength):
     sumWidth = len(sum)
 
     for term in terms:
-        print string.rjust(term, sumWidth)
+        print(str(term).rjust(sumWidth))
 
-    print string.rjust("=", sumWidth, "=")
-    print sum
+    print("=".rjust(sumWidth, "="))
+    print(sum)
     return sumWidth
 
 def displayCarry(terms, displayWidth):
-    print string.rjust("=", sumWidth, "=")
+    print("=".rjust(displayWidth, "="))
 
     carryString = ""
     #
@@ -65,11 +57,22 @@ def displayCarry(terms, displayWidth):
     for position in [1..displayWidth]:
         sum = 0
         for term in terms:
-            sum = sum + term.rjust(sumWidth)[position]
+            sum = sum + term.rjust(displayWidth)[position]
 
         if sum == 0:
             carryString = carryString + " "
-        else
+        else:
             carryString = carryString + sum
 
-    print string.rjust(carryString, sumWidth)
+    print(carryString.rjust(displayWidth))
+
+for line in sys.stdin:
+    #
+    # Parse the input
+    #
+    terms = parseInput(line)
+
+    #
+    # Build the output
+    #
+    displayOutput(terms)
