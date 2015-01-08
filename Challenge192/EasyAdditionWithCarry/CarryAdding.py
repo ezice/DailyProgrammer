@@ -9,8 +9,9 @@ def parseInput(inputLine):
     #
     # Validate the input: Must have a single argument of the form MM+NN[+OO...]
     #
-    terms = re.match(inputLine, "(\d+)[]\+(\d+)]+")
-    print(terms)
+    terms = re.findall("(\d+)(?:\+(\d+))+", inputLine)
+    print (terms)
+
     if terms is None:
         usage()
         quit()
@@ -32,13 +33,15 @@ def displayOutput(terms):
     displayWidth = displayEquation(terms)
     displayCarry(terms, displayWidth)
 
-def displayEquation(terms, maxLength):
+def displayEquation(terms):
     sum = 0
 
     for term in terms:
         sum = sum + term
 
-    sumWidth = len(sum)
+    sumWidth = len(str(sum))
+
+    print()
 
     for term in terms:
         print(str(term).rjust(sumWidth))
@@ -70,7 +73,7 @@ for line in sys.stdin:
     #
     # Parse the input
     #
-    terms = parseInput(line)
+    terms = parseInput(line.rstrip('\n'))
 
     #
     # Build the output
