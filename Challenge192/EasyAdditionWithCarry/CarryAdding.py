@@ -10,7 +10,7 @@ def parseInput(inputLine):
     # Validate the input: Must have a single argument of the form MM+NN[+OO...]
     #
     terms = re.findall("(\d+)(?:\+(\d+))+", inputLine)
-    # print (terms)
+    print (terms)
 
     if terms is None:
         usage()
@@ -46,12 +46,12 @@ def displayEquation(terms):
     for term in terms:
         print(str(term).rjust(sumWidth))
 
-    print("=".rjust(sumWidth, "="))
+    print("-".rjust(sumWidth, "-"))
     print(sum)
     return sumWidth
 
 def displayCarry(terms, displayWidth):
-    print("=".rjust(displayWidth, "="))
+    print("-".rjust(displayWidth, "-"))
 
     carryString = ""
     #
@@ -60,14 +60,17 @@ def displayCarry(terms, displayWidth):
     for position in range(1, displayWidth):
         sum = 0
         for term in terms:
-            sum = sum + term.rjust(displayWidth)[position]
+            term = term.rjust(displayWidth)[position]
 
-        if sum == 0:
+            if term != ' ':
+                sum = sum + int(term)
+
+        if sum < 10:
             carryString = carryString + " "
         else:
-            carryString = carryString + sum
+            carryString = carryString + str(sum)[0]
 
-    print(carryString.rjust(displayWidth))
+    print(carryString.ljust(displayWidth))
 
 for line in sys.stdin:
     #
