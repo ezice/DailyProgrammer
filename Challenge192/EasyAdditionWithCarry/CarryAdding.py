@@ -10,7 +10,7 @@ def parseInput(inputLine):
     # Validate the input: Must have a single argument of the form MM+NN[+OO...]
     #
     terms = re.findall("(\d+)(?:\+(\d+))+", inputLine)
-    print (terms)
+    # print (terms)
 
     if terms is None:
         usage()
@@ -27,7 +27,7 @@ def parseInput(inputLine):
 
     # for term in terms
 
-    return terms
+    return terms[0]
 
 def displayOutput(terms):
     displayWidth = displayEquation(terms)
@@ -37,7 +37,7 @@ def displayEquation(terms):
     sum = 0
 
     for term in terms:
-        sum = sum + term
+        sum = sum + int(term)
 
     sumWidth = len(str(sum))
 
@@ -57,7 +57,7 @@ def displayCarry(terms, displayWidth):
     #
     # Scan left to right.  The first position that can carry is just to the
     # right of the begining (position 1).
-    for position in [1..displayWidth]:
+    for position in range(1, displayWidth):
         sum = 0
         for term in terms:
             sum = sum + term.rjust(displayWidth)[position]
