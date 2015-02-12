@@ -9,6 +9,18 @@ def usage():
     print("<blank line>")
 
 def parseInput(inputLine):
+    #
+    # Validate the input: Must have a single argument of the form NNNNNNNNN
+    #
+    match = re.match("\d[9]", inputLine)
+
+    if terms is None:
+        usage()
+        quit()
+
+    return inputLine
+
+def displayOutput(lines):
     def bankNumber = [
     [" "," _ "," _ ","   "," _ "," _ "," _ "," _ "," _ "],
     ["|","  |","  |","| |","|  ","|  ","  |","| |","| |"],
@@ -17,40 +29,25 @@ def parseInput(inputLine):
     [" "," _ "," _ ","   "," _ "," _ ","   "," _ "," _ "]
     ]
 
-    #
-    # Validate the input: Must have a single argument of the form MM+NN[+OO...]
-    #
-    terms = re.findall("(\d+)(?:\+(\d+))+", inputLine)
-    print (terms)
+    for line in lines:
+        
 
-    if terms is None:
-        usage()
-        quit()
-
-    #
-    # Pad the terms on the left (right-justify).
-    #
-    # maxLength = getMaxLength(terms)
-
-    # for (int i; i < inputTerms.size(); i++) {
-    #     inputTerms[i] = inputTerms[i].padLeft(maxLength)
-    # }
-
-    # for term in terms
-
-    return terms[0]
-
-def displayOutput(terms):
-    displayWidth = displayEquation(terms)
-    displayCarry(terms, displayWidth)
+def lines = []
 
 for line in sys.stdin:
     #
     # Parse the input
     #
-    terms = parseInput(line.rstrip('\n'))
+    if len(lines) < 3:
+        lines += parseInput(line.rstrip('\n'))
+    else if len(lines) == 3:
+        if line.rstrip('\n') != '':
+            usage()
+            quit()
+
+        break
 
     #
     # Build the output
     #
-    displayOutput(terms)
+    displayOutput(lines)
