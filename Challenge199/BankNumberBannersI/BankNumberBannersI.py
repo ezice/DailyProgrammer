@@ -12,35 +12,43 @@ def parseInput(inputLine):
     #
     # Validate the input: Must have a single argument of the form NNNNNNNNN
     #
-    match = re.match("\d[9]", inputLine)
+    match = re.match("\d{9}", inputLine)
 
-    if terms is None:
+    if match is None:
         usage()
         quit()
 
     return inputLine
 
 def displayOutput(lines):
-    def bankNumber = [
-    [" "," _ "," _ ","   "," _ "," _ "," _ "," _ "," _ "],
-    ["|","  |","  |","| |","|  ","|  ","  |","| |","| |"],
-    [" "," _ "," _ "," _ "," _ "," _ ","   "," _ "," _ "],
-    ["|","|  ","  |","  |","  |","| |","  |","| |","  |"],
-    [" "," _ "," _ ","   "," _ "," _ ","   "," _ "," _ "]
+    bankNumber = [
+    [" _ "," "," _ "," _ ","   "," _ "," _ "," _ "," _ "," _ "],
+    ["| |","|"," _|"," _|","|_|","|_ ","|_ ","  |","|_|","|_|"],
+    ["|_|","|","|_ "," _|","  |"," _|","|_|","  |","|_|"," _|"]
     ]
 
-    for line in lines:
-        
 
-def lines = []
+    for line in lines:
+        outputLines = ["", "", ""]
+
+        for digit in line:
+            for i in range(3):
+                outputLines[i] += bankNumber[i][int(digit)]
+
+        for outputLine in outputLines:
+            print(outputLine)
+
+
+lines = []
 
 for line in sys.stdin:
     #
     # Parse the input
     #
+
     if len(lines) < 3:
         lines += parseInput(line.rstrip('\n'))
-    else if len(lines) == 3:
+    elif len(lines) == 3:
         if line.rstrip('\n') != '':
             usage()
             quit()
@@ -51,3 +59,4 @@ for line in sys.stdin:
     # Build the output
     #
     displayOutput(lines)
+    quit()
