@@ -28,10 +28,12 @@ def displayOutput(lines):
     ]
 
 
+    print('in call: length lines = ' + str(len(lines)))
     for line in lines:
         outputLines = ["", "", ""]
 
         for digit in line:
+            print('digit = ' + digit)
             for i in range(3):
                 outputLines[i] += bankNumber[i][int(digit)]
 
@@ -46,6 +48,13 @@ for line in sys.stdin:
     # Parse the input
     #
 
+    print('line = ' + line)
+
+    i = 0
+    for pline in lines:
+        print('lines[' + str(i) + '] = ' + pline)
+        i += 1
+
     if len(lines) < 3:
         lines += parseInput(line.rstrip('\n'))
     elif len(lines) == 3:
@@ -55,8 +64,9 @@ for line in sys.stdin:
 
         break
 
-    #
-    # Build the output
-    #
-    displayOutput(lines)
-    quit()
+#
+# Build the output
+#
+print('before call: length lines = ' + str(len(lines)))
+displayOutput(lines)
+quit()
