@@ -6,7 +6,7 @@ import sys
 # Place character in output buffer
 # At EOF, output buffer
 
-def outputBuffer = ''
+outputBuffer = ''
 
 for line in sys.stdin:
     #
@@ -15,16 +15,15 @@ for line in sys.stdin:
 
     print('line = ' + line)
 
-    def linePosition = 0
-    def workInt
+    linePosition = 0
 
     while (linePosition < len(line)):
         workInt = 0
 
         for i in range(8):
-            workInt = workInt * 2 + string.atoi(line[linePosition])
+            workInt = workInt * 2 + int(line[linePosition])
 
-        outputBuffer.append(chr(workInt))
+        outputBuffer += chr(workInt)
 
 print(outputBuffer)
 quit()
