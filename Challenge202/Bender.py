@@ -6,29 +6,32 @@ import sys
 # Place character in output buffer
 # At EOF, output buffer
 
-outputBuffer = ''
-lines = []
+def getNextCharacter():
+    # Read eight characters from stdin
+    # Convert to int
+    # Convert to ASCII character and return
+    binaryCounter = 0
+    intValue = 0
 
-for line in sys.stdin:
-    #
-    # Parse the input
-    #
-    lines.append(line)
+    while (binaryCounter < 8):
+        binaryCharacter = sys.stdin.read(1)
 
-linePosition = 0
-for lineCounter in range(lines.size()):
+        if (binaryCharacter == ''):
+            return ''
+        elif (binaryCharacter == '\n'):
+            continue
 
-    while (linePosition < len(line)):
-        workInt = 0
+        intValue = (intvalue * 2) + int(binaryCharacter)
+        binaryCounter += 1
 
-        for i in range(8):
-            if (lines[lineCounter][linePosition] == '\n'):
-                
+    return chr(intValue)
 
-            workInt = workInt * 2 + int(line[linePosition])
-            linePosition += 1
+while (True):
+    character = getNextCharacter()
 
-        outputBuffer += chr(workInt)
+    if (character == ''):
+        print
+        break
 
-print(outputBuffer)
+    print(character, end='')
 quit()
