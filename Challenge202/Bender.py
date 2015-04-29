@@ -21,7 +21,7 @@ def getNextCharacter():
         elif (binaryCharacter == '\n'):
             continue
 
-        intValue = (intvalue * 2) + int(binaryCharacter)
+        intValue = (intValue * 2) + int(binaryCharacter)
         binaryCounter += 1
 
     return chr(intValue)
@@ -34,4 +34,6 @@ while (True):
         break
 
     print(character, end='')
+
+print('\n')
 quit()
