@@ -10,7 +10,7 @@ def loadDictionary():
     data = urllib.request.urlopen("http://www.mieliestronk.com/corncob_lowercase.txt")
 
     for word in data:
-        dictionary[word] = word
+        dictionary[word.decode("utf-8")] = word.decode("utf-8")
 
     print("Online dictionary stored.\n")
     return dictionary
@@ -21,12 +21,11 @@ def scoreLine(line, dictionary):
     wordScore = 0
 
     for word in line.split():
-        print("scoring " + str(word))
+#        print("scoring " + word)
         if (word in dictionary):
             wordScore += 1
 
-#    return wordScore
-    return 3
+    return wordScore
 
 # While we've printed less than three lines,
 # read a line from the input data
@@ -41,9 +40,9 @@ data = urllib.request.urlopen("https://gist.githubusercontent.com/anonymous/c8fb
 for line in data:
     linesRead += 1
     # print("Scoring line " + str(linesRead) + "\n")
-    if (scoreLine(line, dictionary) > 0):
+    if (scoreLine(line.decode("utf-8"), dictionary) > 0):
         linesFound += 1
-        print(line);
+        print(line.decode("utf-8"));
 
     if (linesFound == 3):
         break
