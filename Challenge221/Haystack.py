@@ -1,15 +1,18 @@
 import sys
+import urllib.request
 
 # Load a dictionary of words
 #
 def loadDictionary():
     dictionary = {}
 
-    data = urllib2.urlopen("http://www.mieliestronk.com/corncob_lowercase.txt")
+    print("Opening online dictionary.\n")
+    data = urllib.request.urlopen("http://www.mieliestronk.com/corncob_lowercase.txt")
 
     for word in data:
         dictionary[word] = word
 
+    print("Online dictionary stored.\n")
     return dictionary
 
 # Score a line according to recognizable words
@@ -17,11 +20,13 @@ def loadDictionary():
 def scoreLine(line, dictionary):
     wordScore = 0
 
-    for word in line:
+    for word in line.split():
+        print("scoring " + str(word))
         if (word in dictionary):
-            wordScore++
+            wordScore += 1
 
-    return wordScore
+#    return wordScore
+    return 3
 
 # While we've printed less than three lines,
 # read a line from the input data
@@ -30,14 +35,17 @@ def scoreLine(line, dictionary):
 
 dictionary = loadDictionary()
 linesFound = 0
-data = urllib2.urlopen("https://gist.githubusercontent.com/anonymous/c8fb349e9ae4fcb40cb5/raw/05a1ef03626057e1b57b5bbdddc4c2373ce4b465/challenge.txt")
+linesRead = 0
+data = urllib.request.urlopen("https://gist.githubusercontent.com/anonymous/c8fb349e9ae4fcb40cb5/raw/05a1ef03626057e1b57b5bbdddc4c2373ce4b465/challenge.txt")
 
 for line in data:
+    linesRead += 1
+    # print("Scoring line " + str(linesRead) + "\n")
     if (scoreLine(line, dictionary) > 0):
-        linesFound++
+        linesFound += 1
         print(line);
 
     if (linesFound == 3):
         break
-        
+
 quit()
