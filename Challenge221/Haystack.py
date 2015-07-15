@@ -10,8 +10,9 @@ def loadDictionary():
     data = urllib.request.urlopen("http://www.mieliestronk.com/corncob_lowercase.txt")
 
     for word in data:
-        dictionary[word.decode("utf-8")] = word.decode("utf-8")
+        dictionary[word.decode("utf-8").strip("\r\n")] = word.decode("utf-8").strip("\r\n")
 
+#    print(dictionary)
     print("Online dictionary stored.\n")
     return dictionary
 
@@ -24,6 +25,8 @@ def scoreLine(line, dictionary):
 #        print("scoring " + word)
         if (word in dictionary):
             wordScore += 1
+        else:
+            wordScore -= 1
 
     return wordScore
 
