@@ -23,12 +23,17 @@ for line in raw_input():
 def chains = []
 
 # For each column in each row
-for char in line:
-    # If not blank,
-    if (char == 'x'):
+vPos = 0;
 
-            # For each existing chain,
-                # If not in any
+for line in matrix:
+    hPos = 0;
+    
+    for char in line:
+        # If not blank,
+        if (char == 'x'):
+
+                # For each existing chain,
+                    # If not in any
 
 
 # Check matrix against dimensions provided.
