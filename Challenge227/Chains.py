@@ -24,14 +24,18 @@ def chains = []
 
 # For each column in each row
 vPos = 0;
+def lastLine;
 
 for line in matrix:
     hPos = 0;
-    
-    for char in line:
-        # If not blank,
-        if (char == 'x'):
 
+    for char in line:
+        # If not blank, look up and back to see if any neighbors are in chains yet.
+        if (char == 'x'):
+            if (hPos > 0):
+                if (line[hPos - 1] == 'x'):
+                    chain = findChainWithPoint(new Point(vPos, hPos - 1))
+                    chain.addPoint(new Point(vPos, hPos))
                 # For each existing chain,
                     # If not in any
 
