@@ -1,9 +1,22 @@
 import sys
 
+class Point():
+    def __init__(self, xPos, yPos):
+        self.xPos = xPos
+        self.yPos = yPos
+
+chains = []
+
+def findChainWithPoint(point):
+    for chain in chains:
+        for cpoint in chain:
+            if cpoint == point:
+                return chain
+    return None
 #
 # Read dimension line.
 #
-inline = raw_input()
+inline = input()
 
 #
 # Split the dimensions
@@ -14,17 +27,16 @@ columns = inline.split()[1]
 #
 # Read matrix.
 #
-def matrix = []
+matrix = []
 
-for line in raw_input():
+for line in input():
     matrix.append(line)
 
 # Assess chains.
-def chains = []
 
 # For each column in each row
-vPos = 0;
-def lastLine;
+vPos = 0
+lastLine = None
 
 for line in matrix:
     hPos = 0;
@@ -34,13 +46,30 @@ for line in matrix:
         if (char == 'x'):
             if (hPos > 0):
                 if (line[hPos - 1] == 'x'):
-                    chain = findChainWithPoint(new Point(vPos, hPos - 1))
-                    chain.addPoint(new Point(vPos, hPos))
-                # For each existing chain,
-                    # If not in any
+                    chain = findChainWithPoint(Point(vPos, hPos - 1))
 
+                    if (chain == None):
+                        print("Error: found point in current line, but no chain.")
+                        quit(1)
+                    else:
+                        chain.append(Point(vPos, hPos))
+            elif (vPos > 0):
+                if (lastLine[hPos] == 'x'):
+                    chain = findChainWithPoint(Point(vPos - 1, hPos))
 
-# Check matrix against dimensions provided.
+                    if (chain == None):
+                        print("Error: found point in previous line, but no chain.")
+                        quit(2)
+                    else:
+                        chain.append(Point(vPos, hPos))
+            else:
+                chain = [Point(vPos, hPos)]
+                chains.append(chain)
 
+        hPos += 1
+
+    vPos += 1
+    lastLine = line
+print(len(chains))
 # Print answer.
 quit()
