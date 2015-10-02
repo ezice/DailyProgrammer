@@ -5,12 +5,19 @@ class Point():
         self.xPos = xPos
         self.yPos = yPos
 
+    def getXpos(self):
+        return self.xPos
+
+    def getYpos(self):
+        return self.yPos
+
 chains = []
 
 def findChainWithPoint(point):
     for chain in chains:
         for cpoint in chain:
-            if cpoint == point:
+            if ((cpoint.getXpos() == point.getXpos()) and
+                (xpoint.getYpos() == point.getYpos())):
                 return chain
     return None
 #
