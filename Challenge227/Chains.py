@@ -17,7 +17,7 @@ def findChainWithPoint(point):
     for chain in chains:
         for cpoint in chain:
             if ((cpoint.getXpos() == point.getXpos()) and
-                (xpoint.getYpos() == point.getYpos())):
+                (cpoint.getYpos() == point.getYpos())):
                 return chain
     return None
 #
@@ -36,7 +36,7 @@ columns = inline.split()[1]
 #
 matrix = []
 
-for line in input():
+for line in sys.stdin:
     matrix.append(line)
 
 # Assess chains.
@@ -56,10 +56,16 @@ for line in matrix:
                     chain = findChainWithPoint(Point(vPos, hPos - 1))
 
                     if (chain == None):
+                        print("vPos = ", vPos)
+                        print("hPos = ", hPos)
                         print("Error: found point in current line, but no chain.")
                         quit(1)
                     else:
                         chain.append(Point(vPos, hPos))
+                else:
+                    print("New Chain. vPos = ", vPos, "; hPos = ", hPos)
+                    chain = [Point(vPos, hPos)]
+                    chains.append(chain)
             elif (vPos > 0):
                 if (lastLine[hPos] == 'x'):
                     chain = findChainWithPoint(Point(vPos - 1, hPos))
@@ -70,6 +76,7 @@ for line in matrix:
                     else:
                         chain.append(Point(vPos, hPos))
             else:
+                print("New Chain. vPos = ", vPos, "; hPos = ", hPos)
                 chain = [Point(vPos, hPos)]
                 chains.append(chain)
 
