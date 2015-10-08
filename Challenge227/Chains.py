@@ -13,13 +13,42 @@ class Point():
 
 chains = []
 
-def findChainWithPoint(point):
+#
+# Simply find the chain index by searching all the points in all the
+# chains until you find it.
+#
+def findChainIndexWithPoint(point):
+    index = 0
+
     for chain in chains:
         for cpoint in chain:
             if ((cpoint.getXpos() == point.getXpos()) and
                 (cpoint.getYpos() == point.getYpos())):
-                return chain
+                return index
+
+        index += 1
     return None
+
+#
+# Return the chain containing the given point.
+#
+def findChainWithPoint(point):
+    index = findChainIndexWithPoint(point)
+
+    if (index == None):
+        return None
+    else:
+        return chains[index]
+
+#
+# Delete the chain containing the given point.
+#
+def deleteChainWithPoint(point):
+    index = findChainIndexWithPoint(point)
+
+    if (index != None):
+        del chains[index]
+
 #
 # Read dimension line.
 #
@@ -52,6 +81,9 @@ for line in matrix:
         # If not blank, look up and back to see if any neighbors are in chains yet.
         if (char == 'x'):
             if (hPos > 0):
+                #
+                # Search for chain behind us
+                #
                 if (line[hPos - 1] == 'x'):
                     chain = findChainWithPoint(Point(vPos, hPos - 1))
 
@@ -60,6 +92,25 @@ for line in matrix:
                         print("hPos = ", hPos)
                         print("Error: found point in current line, but no chain.")
                         quit(1)
+                    #
+                    # We found a chain behind us, but there might be a chain
+                    # above us and our current position connects two chains.
+                    #
+                    elif ((vPos > 0) and (lastLine[hPos] == 'x')):
+                        topChain = findChainWithPoint(Point(vPos - 1, hPos))
+
+                        if (topChain == None):
+                            print("vPos = ", vPos)
+                            print("hPos = ", hPos)
+                            print("Error: found point in previous line, but no chain.")
+                            quit(3)
+                        else:
+                            #
+                            # Add the current point and the chain behind us,
+                            # then delete the chain behind us.
+                            topChain.append(Point)
+                            topChain.extend(chain)
+                            deleteChainWithPoint(Point(vPos, hPos - 1))
                     else:
                         chain.append(Point(vPos, hPos))
                 else:
