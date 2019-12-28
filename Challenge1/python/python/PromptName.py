@@ -8,5 +8,9 @@ if __name__ == '__main__':
     name = input("What is your name: ");
     age = input("What is your age: ");
     userName = input("What is your Reddit username: ");
-    print("your name is %s, you are %s years old, and your username is %s" % (name, age, userName));
-    
+    outputString = "your name is {}, you are {} years old, and your username is {}\n"
+    outputString = outputString.format(name, age, userName)
+    print(outputString);
+    logfile = open("logfile.txt", "a")
+    logfile.write(outputString);
+    logfile.close()
